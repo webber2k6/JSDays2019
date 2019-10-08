@@ -1,15 +1,15 @@
 import React from "react";
+import {Message} from "../domain/Message";
 
 interface Props {
-    text: string,
-    name: string,
+    message: Message;
 }
 
-const MessageView = ({text, name}: Props) => (
-    <>
-        <article>{text}</article>
-        <footer>{name}</footer>
-    </>
+const MessageView: React.FunctionComponent<Props> = ({message}): JSX.Element => (
+    <article>
+        #{message.id} - {message.message}
+        <footer>By: {message.author}, at: {message.date}</footer>
+    </article>
 );
 
 export default MessageView;
