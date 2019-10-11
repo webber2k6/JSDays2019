@@ -1,28 +1,26 @@
 import React from "react";
-import MessageView from "./components/MessageView";
-import {Message} from "./domain/Message";
 import MessageCompose from "./components/MessageCompose";
+import MessageList from "./components/MessageList";
+import {Message} from "./domain/Message";
 
-const App: React.FunctionComponent = (): JSX.Element => {
-    const messages: Message[] = [
-        {
-            id: "12939",
-            message: "React ist cool",
-            author: "Dennis",
-            date: Date.now()
-        },
-        {
-            id: "12940",
-            message: "React geht so",
-            author: "unbekannt",
-            date: Date.now()
-        }
-    ];
-    const messageElements = messages.map(m => <MessageView message={m} />);
+interface Props {
+}
+
+const App: React.FunctionComponent<Props> = (): JSX.Element => {
+    const [messageList, setMessageList] = React.useState<Message[]>([]);
+
+    const handleOnMessageSubmit = (message: Message) => {
+        setMessageList(currentList => [
+            ...currentList,
+            message
+        ]);
+    };
+
     return (
         <>
-            {messageElements}
-            <MessageCompose />
+            <MessageList messages={messageList}/>
+            <br />
+            <MessageCompose onMessageSubmit={handleOnMessageSubmit} />
         </>
     );
 };

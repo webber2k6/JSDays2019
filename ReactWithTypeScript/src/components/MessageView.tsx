@@ -5,11 +5,13 @@ interface Props {
     message: Message;
 }
 
-const MessageView: React.FunctionComponent<Props> = ({message}): JSX.Element => (
-    <article>
-        #{message.id} - {message.message}
-        <footer>By: {message.author}, at: {message.date}</footer>
-    </article>
-);
+const MessageView: React.FunctionComponent<Props> = ({message}): JSX.Element => {
+    return (
+        <article>
+            {message.message}
+            <footer>By: {message.author}</footer>
+        </article>
+    );
+};
 
 export default MessageView;
